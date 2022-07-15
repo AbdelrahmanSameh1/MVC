@@ -37,18 +37,18 @@ class bootstrap
         // print_r($url);
     }
 
-    private function render() // this function will bootstraping the project we can call it (bootstrap) if we want
+    private function render() // this function will bootstraping the project 
     {
-        $controller = "itrax\\controllers\\" . $this->controller . "Controller";    // note that because we used namespace
+        $controller = "itrax\\controllers\\" . $this->controller . "Controller";
 
         // echo $this->controller;
         // echo $this->method;die;
 
-        if (class_exists($controller)) {      // to find the class we need to use the autoloader... but here we will use the autoloader by the composer
+        if (class_exists($controller)) {
             // echo $controller . "<br>";
             $controller = new $controller;
             if (method_exists($controller, $this->method)) {
-                call_user_func_array([$controller, $this->method], $this->params);     // remember this function
+                call_user_func_array([$controller, $this->method], $this->params);
             }
         }
     }

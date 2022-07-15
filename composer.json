@@ -1,6 +1,6 @@
 {
-    "name" : "itrax/framework",
-    "description": "itrax framework",
+    "name" : "mvc/framework",
+    "description": "mvc framework",
     "license": "MIT",
     "type": "framework",
     "require": {

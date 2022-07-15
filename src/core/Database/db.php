@@ -16,7 +16,7 @@ class db implements IDbstandard
   protected $table;
   // protected $table = "instructor";   // here we was testing the registry class... comment this line
 
-  public function __construct()   // we use the construct to make a connection to the database if we create an object from the class
+  public function __construct()
   {
     $this->connection = mysqli_connect("localhost", "root", "", "lms");
   }
@@ -35,20 +35,20 @@ class db implements IDbstandard
 
   public function where($column, $compair, $value)
   {
-    $this->sql .= " WHERE $column $compair '$value'";     // note here (.=) make concatenation 
-    // echo $this->sql;die;    // we use this line for debugging
+    $this->sql .= " WHERE $column $compair '$value'";
+    // echo $this->sql;die;    
     return $this;
   }
   public function andWhere($column, $compair, $value)
   {
-    $this->sql .= " AND `$column` $compair '$value'";     // note here (.=) make concatenation 
-    // echo $this->sql;die;    // we use this line for debugging
+    $this->sql .= " AND `$column` $compair '$value'";
+    // echo $this->sql;die;    
     return $this;
   }
   public function orWhere($column, $compair, $value)
   {
-    $this->sql .= " OR `$column` $compair '$value'";     // note here (.=) make concatenation 
-    // echo $this->sql;die;    // we use this line for debugging
+    $this->sql .= " OR `$column` $compair '$value'";
+    // echo $this->sql;die;    
     return $this;
   }
 
@@ -62,7 +62,7 @@ class db implements IDbstandard
   public function getAll()
   {
     $this->query();
-    // echo $this->sql;die;    // we use this line for debugging
+    // echo $this->sql;die;    
     while ($row = mysqli_fetch_assoc($this->query)) {
       $data[] = $row;
     }
@@ -71,21 +71,11 @@ class db implements IDbstandard
 
   public function getRow()
   {
-    // echo $this->sql;die;    // we use this line for debugging
+    // echo $this->sql;die;    
     $this->query();
     $row = mysqli_fetch_assoc($this->query);
     return $row;
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -98,20 +88,10 @@ class db implements IDbstandard
     $row = $this->prepareData($data);
 
     $this->sql = "INSERT INTO `$this->table` SET $row";
-    // echo $this->sql;die;    // this line for debugging
+    // echo $this->sql;die;    
 
     return $this;
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -128,21 +108,6 @@ class db implements IDbstandard
     // echo $this->sql;die;
     return $this;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -167,7 +132,7 @@ class db implements IDbstandard
       if (mysqli_affected_rows($this->connection) > 0) {
         return true;
       }
-    } catch (Exception $ex) {                 // if there is an error in (try) you will catch it here, and also you can catch the error here if you throw a certain exception
+    } catch (Exception $ex) {
       // echo $ex->getMessage();
       return $this->showError();
     }
@@ -196,7 +161,7 @@ class db implements IDbstandard
   {
     // echo $this->sql;die;
     $this->query = mysqli_query($this->connection, $this->sql);
-    // $connection->query("$this->sql");    note this syntax... but this will not work here
+    // $connection->query("$this->sql");    
   }
 
   public function showError()

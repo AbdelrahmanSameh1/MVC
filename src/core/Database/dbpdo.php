@@ -1,12 +1,12 @@
 <?php
 
-// remeber here we convert the last mysqli class to pdo class
+// here we convert the last mysqli class to pdo class
 
 namespace itrax\core\Database;
 
 use itrax\core\Database\contract\IDbstandard;
 use PDO;
-use Exception;      // note this 
+use Exception;
 
 
 class dbpdo implements IDbstandard
@@ -14,16 +14,16 @@ class dbpdo implements IDbstandard
     public $query;
     public $sql;
     protected $table;
-    // protected $table = "instructor";   // here we was testing the registry class... comment this line
+    // protected $table = "instructor"; 
 
 
     protected $connection;
     private $dsn = "mysql:host=localhost;dbname=lms;charset=UTF8";
 
 
-    public function __construct()   // we use the construct to make a connection to the database if we create an object from the class
+    public function __construct()
     {
-        // $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);     // this is not essential line     // here we set an attribute... this line show some errors if there is an errors
+        // $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);       // here we set an attribute... this line show some errors if there is an errors
         $this->connection = new PDO($this->dsn, "root", "");        // pdo way
     }
 
@@ -41,20 +41,20 @@ class dbpdo implements IDbstandard
 
     public function where($column, $compair, $value)
     {
-        $this->sql .= " WHERE $column $compair '$value'";     // note here (.=) make concatenation 
-        // echo $this->sql;die;    // we use this line for debugging
+        $this->sql .= " WHERE $column $compair '$value'";
+        // echo $this->sql;die;    
         return $this;
     }
     public function andWhere($column, $compair, $value)
     {
-        $this->sql .= " AND `$column` $compair '$value'";     // note here (.=) make concatenation 
-        // echo $this->sql;die;    // we use this line for debugging
+        $this->sql .= " AND `$column` $compair '$value'";
+        // echo $this->sql;die;    
         return $this;
     }
     public function orWhere($column, $compair, $value)
     {
-        $this->sql .= " OR `$column` $compair '$value'";     // note here (.=) make concatenation 
-        // echo $this->sql;die;    // we use this line for debugging
+        $this->sql .= " OR `$column` $compair '$value'";
+        // echo $this->sql;die;    
         return $this;
     }
 
@@ -68,7 +68,7 @@ class dbpdo implements IDbstandard
     public function getAll()
     {
         $this->query();
-        // echo $this->sql;die;    // we use this line for debugging
+        // echo $this->sql;die;    
         // while ($row = mysqli_fetch_assoc($this->query)) {    // mysqli way
         //     $data[] = $row;
         // }
@@ -79,20 +79,12 @@ class dbpdo implements IDbstandard
 
     public function getRow()
     {
-        // echo $this->sql;die;    // we use this line for debugging
+        // echo $this->sql;die;    
         $this->query();
         // $row = mysqli_fetch_assoc($this->query);     // mysqli way
         $row = $this->query->fetch(pdo::FETCH_ASSOC);       // pdo way
         return $row;
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -107,17 +99,10 @@ class dbpdo implements IDbstandard
         $row = $this->prepareData($data);
 
         $this->sql = "INSERT INTO `$this->table` SET $row";
-        // echo $this->sql;die;    // this line for debugging
+        // echo $this->sql;die;   
 
         return $this;
     }
-
-
-
-
-
-
-
 
 
 
@@ -137,21 +122,6 @@ class dbpdo implements IDbstandard
         // echo $this->sql;die;
         return $this;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -180,7 +150,7 @@ class dbpdo implements IDbstandard
                 return true;
             }
         } catch (Exception $ex) {
-            // echo "error to u";           // if there is an error in (try) you will catch it here, and also you can catch the error here if you throw a certain exception
+            // echo "error to u";       
             // echo $ex->getMessage();
             return $this->showError();
         }
@@ -209,18 +179,22 @@ class dbpdo implements IDbstandard
     {
         // echo $this->sql;die;
         // $this->query = mysqli_query($this->connection, $this->sql);     // mysqli
+
         $this->query = $this->connection->query($this->sql);      // pdo
-        // $connection->query("$this->sql");    note this syntax... but this will not work here
+
+        // $connection->query("$this->sql");    
     }
 
     public function showError()
     {
-        // mysqli_connect_error();       // note this function
-        // mysqli_connect_errno();       // note this functionn
+        // mysqli_connect_error();       
+        // mysqli_connect_errno();       
 
         // return mysqli_error($this->connection);
         // $errors = mysqli_error_list($this->connection);      // mysqli way
-        $errors = $this->connection->errorInfo();           // pdo way.... note how we write this
+
+        $errors = $this->connection->errorInfo();           // pdo way
+
         // echo "<pre>";
         // print_r($errors);die;
         // foreach ($errors as $error) {

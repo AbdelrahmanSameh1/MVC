@@ -3,7 +3,7 @@
 namespace itrax\core;
 
 
-// this class enable us to treat with the database by (msqli or pdo)
+
 
 class registry
 {
@@ -13,7 +13,7 @@ class registry
 
     public static function set($key, $value)
     {
-        static::$object[$key] = $value;      // remember the difference between (self & static in this case) (late static bindings)
+        static::$object[$key] = $value;
     }
 
     public static function get($key)

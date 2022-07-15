@@ -39,10 +39,6 @@ class homeController extends controller
 
 
 
-
-
-
-
         // $validation = new validation;
         // $validation->input("username");
         // print_r($validation->showError());
@@ -61,8 +57,6 @@ class homeController extends controller
 
 
 
-
-
         // $date = registry::get("db")->select("*")->getAll();    // here we use mysqli
         // $date2 = registry::get("dbpdo")->select("*")->getAll();  // here we use pdo
         // print_r($date);
@@ -71,23 +65,13 @@ class homeController extends controller
 
 
 
-
-
-
-
         echo "<br><hr><br>";
-
-
-
-
 
 
         echo "home test";
         // return $this->view("home");
         return $this->view("index", ["title" => "mohamed"]);
     }
-
-
 
 
 
